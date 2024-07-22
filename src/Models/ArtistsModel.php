@@ -15,8 +15,14 @@ class ArtistsModel {
         ON `artists`.`id` = `albums`.`artist_id`
         INNER JOIN `songs`
         ON `albums`.`id` = `songs`.`album_id`;');
-
+        $query->setFetchMode(PDO::FETCH_CLASS, Artist::class);
         $query->execute();
         return $query->fetchAll();
     }
+
+    public function displayThreeArtists($artists) {
+    shuffle($artists);
+    $threeArtists = array_slice($artists, 0, 3);
+    return $threeArtists;
+}
 }
