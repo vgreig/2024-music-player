@@ -30,7 +30,7 @@ class ArtistsModel {
 		FROM `artists`
 		INNER JOIN `albums`
 		ON `artists`.`id` = `albums`.`artist_id`;');
-        $query->setFetchMode(PDO::FETCH_CLASS, Artist::class);
+        //$query->setFetchMode(PDO::FETCH_CLASS, Artist::class);
         $query->execute();
         return $query->fetchAll();
     }

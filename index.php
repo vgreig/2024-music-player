@@ -5,17 +5,20 @@ require_once 'src/Services/DatabaseConnector.php';
 require_once 'src/Entities/Song.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
+require_once 'src/Services/DisplayArtistsAlbums.php';
 
 $db = DatabaseConnector::connect();
 
 $artist = new ArtistsModel($db);
 $allArtists = $artist->getArtistAlbum();
 
+$displayAlbums = displayAlbums(10, $allArtists);
+
 $songs = new SongsModel($db);
 $songsInAlbum = $songs->getSongsByAlbum(2);
 
 echo '<pre>';
-var_dump($allArtists);
+var_dump($displayAlbums);
 echo '</pre>';
 
 echo '<pre>';
@@ -48,7 +51,12 @@ echo '</pre>';
                 </a>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+                <?php
+                foreach ($displayAlbums as $album) {
+                    echo '<h4 class="mb-3 text-2xl font-bold">{$album}</h4>';
+                }
 
+                ?>
                 <div class="rounded p-3 bg-cyan-950">
                     <!--ALBUM NAME-->
 
