@@ -5,7 +5,7 @@ declare(strict_types=1);
 class Song {
     private string $songName;
     private float $length;
-    private int $playCount;
+    private ?int $playCount;
 
     public function getSongName(): string
     {
@@ -19,6 +19,9 @@ class Song {
 
     public function getPlayCount(): int
     {
+        if (gettype($this->playCount) === 'NULL'){
+            $this->playCount = 0;
+        }
         return $this->playCount;
     }
 

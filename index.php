@@ -48,7 +48,7 @@ echo '</pre>';
                             <!--SONG NAME-->
                             <h4 class="font-bold text-lg">Song name</h4>
                             <!--PLAY NUMBER-->
-                            <p class="text-sm">Played 4 times</p>
+                            <p class="text-sm">Played <?php $songsInAlbum[0]->getLength(); ?> times</p>
                         </div>
                         <div class="flex items-center justify-between w-24">
                             <!--LENGTH-->
