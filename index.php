@@ -2,12 +2,16 @@
 
 require_once 'src/Models/SongsModel.php';
 require_once 'src/Services/DatabaseConnector.php';
+require_once 'src/Entities/Song.php';
 
 $db = DatabaseConnector::connect();
 
 $songs = new SongsModel($db);
+$songsInAlbum = $songs->getSongsByAlbum(2);
 
-var_dump($songs);
+echo '<pre>';
+var_dump($songsInAlbum);
+echo '</pre>';
 
 ?>
 <!DOCTYPE html>
@@ -25,6 +29,7 @@ var_dump($songs);
     <main class="group grow h-screen">
         <section class="group-[.minimised]:h-[calc(100%-6rem)] h-3/4 p-12 overflow-auto">
             <div class="flex justify-between">
+                <!--   ARTIST NAME             -->
                 <h2 class="text-4xl font-bold mb-6">Artist name</h2>
                 <a href="artists.html" class="align-top">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 inline">
@@ -36,13 +41,17 @@ var_dump($songs);
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
 
                 <div class="rounded p-3 bg-cyan-950">
+                    <!--ALBUM NAME-->
                     <h4 class="mb-3 text-2xl font-bold">Album name</h4>
                     <div class="mx-3 mb-3 flex justify-between items-center">
                         <div class="w-3/4 pe-3">
+                            <!--SONG NAME-->
                             <h4 class="font-bold text-lg">Song name</h4>
+                            <!--PLAY NUMBER-->
                             <p class="text-sm">Played 4 times</p>
                         </div>
                         <div class="flex items-center justify-between w-24">
+                            <!--LENGTH-->
                             <span class="text-slate-500">3:36</span>
                             <a href="?playSong=1" class="hover:text-slate-500 hover:cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline">

@@ -17,4 +17,14 @@ class SongsModel {
         $query->execute();
         return $query->fetchAll();
     }
+
+    public function getSongsByAlbum(int $id): array
+    {
+        $query = $this->db->prepare('SELECT `songs`.`song_name` AS "songName", `songs`.`length`, 
+        `songs`.`play_count` AS "playCount" FROM `songs` INNER JOIN `albums` ON `songs`.`album_id` = `albums`.`id` 
+        WHERE `albums`.`id` = :id;');
+        $query->setFetchMode(PDO::FETCH_CLASS, Song::class);
+        $query->execute(['id' => $id]);
+        return $query->fetchAll();
+    }
 }
