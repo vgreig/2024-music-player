@@ -12,9 +12,10 @@ class Song {
         return $this->songName;
     }
 
-    public function getLength(): float
+    public function getLength(): string
     {
-        return $this->length;
+        $formattedLength = strval($this->length);
+        return str_replace('.', ':', $formattedLength);
     }
 
     public function getPlayCount(): int
