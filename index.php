@@ -28,36 +28,19 @@ echo '<!DOCTYPE html>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 mt-12 gap-5">
                 <div class="">
                     <h3 class="text-xl font-bold mb-3">Artists</h3>
-                    <div class="grid grid-cols-2 gap-3 mb-3">
-                        <a class="rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer">
-                            <div class="flex gap-2 h-8">
-                                <img class="rounded" src="https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees" />
-                                <img class="rounded" src="https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees" />
-                            </div>';
-                            foreach ($displayArtists as $artist) {
-                                echo "
-                            
+                    <div class="grid grid-cols-2 gap-3 mb-3">';
+                    foreach ($displayArtists as $artist) {
+                        echo "
+                        <a class='rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer'>
+                            <div class='flex gap-2 h-8'>
+                                <img class='rounded' src='{$artist->getArtworkUrl()}' />
+                                <img class='rounded' src='{$artist->getArtworkUrl()}'  />
+                            </div>
                             <h4 class='text-xl font-bold'>{$artist->getArtistName()}</h4>
-                            <p>3 Albums</p>";
-                                    }
-                        echo '</a>
-                        <a class="rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer">
-                            <div class="flex gap-2 h-8">
-                                <img class="rounded" src="https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees" />
-                                <img class="rounded" src="https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees" />
-                            </div>
-                            <h4 class="text-xl font-bold">the ting tings</h4>
                             <p>3 Albums</p>
-                        </a>
-                        <a class="rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer">
-                            <div class="flex gap-2 h-8">
-                                <img class="rounded" src="https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees" />
-                                <img class="rounded" src="https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees" />
-                            </div>
-                            <h4 class="text-xl font-bold">the ting tings</h4>
-                            <p>3 Albums</p>
-                        </a>
-                        <div class="rounded bg-cyan-950 p-3 flex items-center">
+                            </a>";
+                    }
+                       echo '<div class="rounded bg-cyan-950 p-3 flex items-center">
                             <h4 class="text-2xl text-slate-500">+ 16 more</h4>
                         </div>
                     </div>
