@@ -24,5 +24,10 @@ class ArtistsModel {
     shuffle($artists);
     $threeArtists = array_slice($artists, 0, 3);
     return $threeArtists;
-}
+    }
+
+//count = 0
+//for artist as artist if album_name != album_name
+//  count++
+// return count
 }

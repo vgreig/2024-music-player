@@ -8,9 +8,20 @@ require_once 'src/Entities/Artist.php';
 $db = DatabaseConnector::connect();
 
 $artistsModel = new ArtistsModel($db);
+$artistAlbums = new Artist();
 $artists = $artistsModel->getAllArtists();
 $displayArtists = $artistsModel->displayThreeArtists($artists);
-var_dump($displayArtists);
+$albumName = $artistAlbums->getAlbumName();
+//function getAlbumCount($artists, $albumName)
+//{
+//    $count = 0;
+//    foreach ($artists as $artist) {
+//        if (
+//            $albumName != $albumName
+//        )
+//    }
+//};
+var_dump($albumName);
 
 echo '<!DOCTYPE html>
 <html lang="en">
