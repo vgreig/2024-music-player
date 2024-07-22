@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+//namespace Example\Services;
 class DatabaseConnector {
     public static function connect(): PDO
     {
