@@ -11,6 +11,8 @@ $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
 $displayArtists = $artistsModel->displayThreeArtists($artists);
+$albums = $artistsModel->getArtistAlbums();
+
 
 
 ?>

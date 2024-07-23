@@ -46,4 +46,33 @@ class ArtistsModel
         $threeArtists = array_slice($artistResults, 0, 3);
         return $threeArtists;
     }
+
+    public function getArtistAlbums()
+    {
+        $artistalbums = $this->db->prepare("
+        SELECT `albums`.`id`, `albums`. `album_name`, `albums`.`artwork_url`, `albums`.`artist_id`, `songs`.`id` AS 'song_id', `songs`.`album_id`,`artists`.`id` AS 'artist_id', `artists`.`artist_name`
+        FROM `albums`
+        INNER JOIN `songs` ON `songs`. `album_id` = `albums`.`id`
+        INNER JOIN `artists` ON `artists`.`id` = `albums`.`artist_id`;");
+        $artistalbums->setFetchMode(PDO::FETCH_CLASS, Artist::class);
+        $artistalbums->execute();
+        $albumsResults = $artistalbums->fetchAll();
+
+        $songquery = $this->db->prepare("SELECT `album_id`, COUNT(`album_id`) AS 'song_count' FROM `songs` GROUP BY `album_id`;");
+        $songquery->execute();
+        $songresults = $songquery->fetchAll();
+
+        foreach ($albumsResults as $album)
+        {
+            foreach ($songresults as $song)
+            {
+                if ($album->getAlbumId() === $song['album_id'])
+                {
+                    $album->setSongCount($song['song_count']);
+                }
+            }
+        }
+         return $albumsResults;
+    }
+
 }
