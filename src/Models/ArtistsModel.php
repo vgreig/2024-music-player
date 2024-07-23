@@ -76,3 +76,6 @@ class ArtistsModel
     }
 
 }
+
+// `songs`.`id` AS 'song_id', `songs`.`album_id`,
+// INNER JOIN `songs` ON `songs`. `album_id` = `albums`.`id`
