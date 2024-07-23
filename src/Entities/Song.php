@@ -14,7 +14,7 @@ class Song {
 
     public function getLength(): string
     {
-        $formattedLength = strval($this->length);
+        $formattedLength = number_format($this->length, 2, '.', ',');
         return str_replace('.', ':', $formattedLength);
     }
 
