@@ -11,8 +11,7 @@ $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
 $displayArtists = $artistsModel->displayThreeArtists($artists);
-//echo '<pre>';
-//var_dump($displayArtists);
+
 
 
 echo '<!DOCTYPE html>
