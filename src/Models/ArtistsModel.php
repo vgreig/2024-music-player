@@ -34,4 +34,11 @@ class ArtistsModel {
         $query->execute();
         return $query->fetchAll();
     }
+
+//    public function getArtistById()
+//    {
+//        $query = $this->db->prepare();
+//        $query->execute();
+//        return $query->fetch();
+//    }
 }

@@ -10,5 +10,6 @@ function displayAlbums(int $artistId, array $allArtists): array
              $albumsArray[] = $artist['album_name'];
         }
     }
+
     return $albumsArray;
 }

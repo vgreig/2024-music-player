@@ -6,6 +6,8 @@ require_once 'src/Entities/Song.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
 require_once 'src/Services/DisplayArtistsAlbums.php';
+require_once 'src/Models/AlbumsModel.php';
+require_once 'src/Entities/Album.php';
 
 $db = DatabaseConnector::connect();
 
@@ -17,8 +19,12 @@ $displayAlbums = displayAlbums(10, $allArtists);
 $songs = new SongsModel($db);
 $songsInAlbum = $songs->getSongsByAlbum(2);
 
+$albums = new AlbumsModel($db);
+$album = $albums->getAlbumById(2);
+
+
 echo '<pre>';
-var_dump($displayAlbums);
+var_dump($album);
 echo '</pre>';
 
 echo '<pre>';
@@ -53,7 +59,7 @@ echo '</pre>';
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 <?php
                 foreach ($displayAlbums as $album) {
-                    echo '<h4 class="mb-3 text-2xl font-bold">{$album}</h4>';
+                    echo "<h4 class='mb-3 text-2xl font-bold'>$album</h4>";
                 }
 
                 ?>
