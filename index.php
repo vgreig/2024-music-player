@@ -54,20 +54,16 @@ echo '</pre>';
                 </a>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-<!--                --><?php
-//                foreach ($artistsAlbums as $singleAlbum) {
-//                    echo "<h4 class='mb-3 text-2xl font-bold'>$singleAlbum->get</h4>";
-//
-//                }
-//
-//                ?>
-                <div class="rounded p-3 bg-cyan-950">
-                    <!--ALBUM NAME-->
+                <?php
+                $albums = '';
+                foreach ($artistsAlbums as $singleAlbum) {
+                    $albums .= "
+                        <div class='rounded p-3 bg-cyan-950'>
+                        <h4 class='mb-3 text-2xl font-bold'>$singleAlbum->getAlbumName()</h4>
+                        ";
 
-                    <h4 class="mb-3 text-2xl font-bold"><?php echo $album->getAlbumName(); ?></h4>
-                    <?php
                     foreach ($songsInAlbum as $songInAlbum) {
-                        echo "
+                        $albums .= "
                     <div class='mx-3 mb-3 flex justify-between items-center'>
                         <div class='w-3/4 pe-3'>
                             <!--SONG NAME-->
@@ -92,8 +88,9 @@ echo '</pre>';
                             </a>
                         </div>
                     </div>";}
-                    ?>
-                </div>
+                    $albums .= "</div>";
+                }
+                ?>
 
             </div>
         </section>
