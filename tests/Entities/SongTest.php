@@ -16,4 +16,24 @@ class SongTest extends TestCase {
 
         $this->assertEquals($expected, $result);
     }
+    public function testGetPlayCountIfNull(): void
+    {
+        $song = new Song('song 2', 3.00, NULL);
+        $result = $song->getPlayCount();
+
+        $expected = 0;
+
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testGetPlayCountIfInt(): void
+    {
+        $song = new Song('song 2', 3.00, 3);
+        $result = $song->getPlayCount();
+
+        $expected = 3;
+
+        $this->assertEquals($expected, $result);
+
+    }
 }

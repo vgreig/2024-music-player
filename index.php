@@ -14,20 +14,12 @@ $db = DatabaseConnector::connect();
 $artistId = 1;
 
 $artists = new ArtistsModel($db);
-
 $artist = $artists->getArtistById($artistId);
 
 $songs = new SongsModel($db);
 
 $albums = new AlbumsModel($db);
-
 $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
-
-$song2 = new Song('song 2', 3.00, NULL);
-
-echo '<pre>';
-var_dump($song2->getLength());
-echo '</pre>';
 
 ?>
 <!DOCTYPE html>
