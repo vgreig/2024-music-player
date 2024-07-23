@@ -8,12 +8,12 @@ require_once 'src/Entities/Artist.php';
 $db = DatabaseConnector::connect();
 
 $artistsModel = new ArtistsModel($db);
-$artistAlbums = new Artist();
+$artist = new Artist();
 $artists = $artistsModel->getAllArtists();
 $displayArtists = $artistsModel->displayThreeArtists($artists);
-$albumCount = $artistsModel->getAlbumCount();
+//echo '<pre>';
+//var_dump($displayArtists);
 
-var_dump($artists);
 
 echo '<!DOCTYPE html>
 <html lang="en">
@@ -40,11 +40,11 @@ echo '<!DOCTYPE html>
                                 <img class='rounded' src='{$artist->getArtworkUrl()}'  />
                             </div>
                             <h4 class='text-xl font-bold'>{$artist->getArtistName()}</h4>
-//                            <p>{$artist->getAlbumCount()} Albums</p>
-//                            </a>";
+                            <p>{$artist->getAlbumCount()} Albums</p>
+                            </a>";
                     }
                        echo '<div class="rounded bg-cyan-950 p-3 flex items-center">
-                            <h4 class="text-2xl text-slate-500">+ 16 more</h4>
+                            <h4 class="text-2xl text-slate-500">+ 15 more</h4>
                         </div>
                     </div>
                     <a href="artists.html" class="float-right border rounded-md bg-cyan-950 px-2 py-1 hover:bg-cyan-800">See all

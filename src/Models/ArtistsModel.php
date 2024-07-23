@@ -12,7 +12,7 @@ class ArtistsModel
 
     public function getAllArtists()
     {
-        $artistquery = $this->db->prepare('SELECT `artists`.`id`, `artists`.`artist_name`, `albums`.`id`, `albums`.`album_name`, `albums`.`artwork_url`, `albums`.`artist_id`,`songs`.`album_id`,`songs`.`id` AS `song_id`
+        $artistquery = $this->db->prepare('SELECT `artists`.`id`, `artists`.`artist_name`, `albums`.`album_name`, `albums`.`artwork_url`, `albums`.`artist_id`,`songs`.`album_id`,`songs`.`id` AS `song_id`
         FROM `albums`
         INNER JOIN `artists`
         ON `artists`.`id` = `albums`.`artist_id`
@@ -20,18 +20,30 @@ class ArtistsModel
         ON `albums`.`id` = `songs`.`album_id`;');
         $artistquery->setFetchMode(PDO::FETCH_CLASS, Artist::class);
         $artistquery->execute();
-        return $artistquery->fetchAll();
+        $artistResults = $artistquery->fetchAll();
 
         $albumquery = $this->db->prepare("SELECT `artist_id`, COUNT(`artist_id`) AS 'album_count' 
         FROM `albums` GROUP BY `artist_id`;");
         $albumquery->execute();
-        return $albumquery->fetchAll();
+        $albumCountResults = $albumquery->fetchAll();
+
+        foreach ($artistResults as $artist)
+        {
+            foreach ($albumCountResults as $album)
+            {
+                if ($artist->getId() === $album['artist_id'])
+                {
+                   $artist->setAlbumCount($album['album_count']);
+                }
+            }
+        }
+        return $artistResults;
     }
 
-    public function displayThreeArtists($artists)
+    public function displayThreeArtists($artistResults)
     {
-        shuffle($artists);
-        $threeArtists = array_slice($artists, 0, 3);
+        shuffle($artistResults);
+        $threeArtists = array_slice($artistResults, 0, 3);
         return $threeArtists;
     }
 }

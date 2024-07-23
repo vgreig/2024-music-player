@@ -17,6 +17,7 @@ class Artist {
 
     private int $album_count;
 
+
     public function getAlbumCount(): int
     {
         return $this->album_count;
@@ -26,6 +27,7 @@ class Artist {
     {
         $this->album_count = $album_count;
     }
+
 
     public function getId(): int
     {
