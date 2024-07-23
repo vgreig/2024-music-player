@@ -21,10 +21,12 @@ $songs = new SongsModel($db);
 
 $albums = new AlbumsModel($db);
 
-    $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
+$artistsAlbums = $albums->getAlbumsByArtistId($artistId);
+
+$song2 = new Song('song 2', 3.00, NULL);
 
 echo '<pre>';
-var_dump($artistsAlbums);
+var_dump($song2->getLength());
 echo '</pre>';
 
 ?>
@@ -36,14 +38,10 @@ echo '</pre>';
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="play.js"></script>
 </head>
-
-
 <div class="h-screen w-full bg-blue-950 flex text-white">
-
     <main class="group grow h-screen">
         <section class="group-[.minimised]:h-[calc(100%-6rem)] h-3/4 p-12 overflow-auto">
             <div class="flex justify-between">
-                <!--   ARTIST NAME             -->
                 <h2 class="text-4xl font-bold mb-6"><?php echo $artist->getArtistName(); ?></h2>
                 <a href="artists.html" class="align-top">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 inline">
@@ -56,7 +54,6 @@ echo '</pre>';
                 $albums = DisplayArtistsAlbums::displayAlbums($artistsAlbums, $songs);
                 echo $albums;
                 ?>
-
             </div>
         </section>
     </main>

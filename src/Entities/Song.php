@@ -7,6 +7,13 @@ class Song {
     private float $length;
     private ?int $playCount;
 
+    public function __construct(string $songName = '', float $length = 0, ?int $playCount = 0)
+    {
+        $this->songName = $songName;
+        $this->length = $length;
+        $this->playCount = $playCount;
+    }
+
     public function getSongName(): string
     {
         return $this->songName;
@@ -25,6 +32,4 @@ class Song {
         }
         return $this->playCount;
     }
-
-
 }
