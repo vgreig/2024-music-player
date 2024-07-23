@@ -21,8 +21,7 @@ class Song {
 
     public function getLength(): string
     {
-        $formattedLength = number_format($this->length, 2, '.', ',');
-        return str_replace('.', ':', $formattedLength);
+        return number_format($this->length, 2, ':', ',');
     }
 
     public function getPlayCount(): int

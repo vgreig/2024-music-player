@@ -2,17 +2,11 @@
 
 class Artist {
     private int $id;
-
     private string $artist_name;
-
     private int $album_id;
-
     private string $album_name;
-
     private string $artwork_url;
-
     private int $artist_id;
-
     private int $song_id;
 
     public function getId(): int

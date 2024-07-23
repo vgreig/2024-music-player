@@ -8,7 +8,7 @@ class AlbumsModel {
         $this->db = $db;
     }
 
-    public function getAlbumById(int $id)
+    public function getAlbumById(int $id): Album
     {
         $query = $this->db->prepare('SELECT `albums`.`id` AS "albumId", `albums`.`album_name` AS "albumName",  
         `albums`.`artwork_url` AS "artworkURL", `albums`.`artist_id` AS "artistId" FROM `albums` WHERE `albums`.`id` = :id;');
@@ -17,7 +17,7 @@ class AlbumsModel {
         return $query->fetch();
     }
 
-    public function getAllAlbums()
+    public function getAllAlbums(): array
     {
         $query = $this->db->prepare('SELECT `albums`.`id` AS "albumId", `albums`.`album_name` AS "albumName",  
         `albums`.`artwork_url` AS "artworkURL", `albums`.`artist_id` AS "artistId" FROM `albums`;');
@@ -26,7 +26,7 @@ class AlbumsModel {
         return $query->fetchAll();
     }
 
-    public function getAlbumsByArtistId(int $artistId)
+    public function getAlbumsByArtistId(int $artistId): array
     {
         $query = $this->db->prepare('SELECT `albums`.`id` AS "albumId", `albums`.`album_name` AS "albumName",  
         `albums`.`artwork_url` AS "artworkURL", `albums`.`artist_id` AS "artistId" FROM `albums` 
