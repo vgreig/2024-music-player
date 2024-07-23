@@ -2,25 +2,42 @@
 
 declare(strict_types=1);
 
-class DisplayArtistsAlbums {
-    public static function displayAlbums(array $artistsAlbums, SongsModel $songs): string
+require_once 'src/Services/DisplayArtistsAlbums.php';
+require_once 'src/Models/SongsModel.php';
+require_once 'src/Models/AlbumsModel.php';
+require_once 'src/Entities/Album.php';
+
+use PHPUnit\Framework\TestCase;
+
+class DisplayArtistsAlbumsTest extends TestCase {
+    public function testDisplayAlbums(): void
     {
-        $albums = '';
-        foreach ($artistsAlbums as $singleAlbum) {
-            $albums .= "
-                        <div class='rounded p-3 bg-cyan-950'>
-                        <h4 class='mb-3 text-2xl font-bold'>{$singleAlbum->getAlbumName()}</h4>
-                        ";
-            $songsInAlbum = $songs->getSongsByAlbum($singleAlbum->getAlbumId());
-            foreach ($songsInAlbum as $songInAlbum) {
-                $albums .= "
+        $songMock = $this->createMock(Song::class);
+        $songMock->method('getSongName')->willReturn('song');
+        $songMock->method('getPlayCount')->willReturn(50);
+        $songMock->method('getLength')->willReturn('3:45');
+
+        $songsModelMock = $this->createMock(SongsModel::class);
+        $songsModelMock->method('getSongsByAlbum')->willReturn([$songMock]);
+
+        $albumMock = $this->createMock(Album::class);
+        $albumMock->method('getAlbumName')->willReturn('album name');
+        $albumMock->method('getAlbumId')->willReturn(1);
+
+        $result = DisplayArtistsAlbums::displayAlbums([$albumMock], $songsModelMock);
+
+//        exit();
+
+        $expected = "                        <div class='rounded p-3 bg-cyan-950'>
+                        <h4 class='mb-3 text-2xl font-bold'>album name</h4>
+                        
                     <div class='mx-3 mb-3 flex justify-between items-center'>
                         <div class='w-3/4 pe-3'>
-                            <h4 class='font-bold text-lg'>{$songInAlbum->getSongName()}</h4>
-                            <p class='text-sm'>Played {$songInAlbum->getPlayCount()} times</p>
+                            <h4 class='font-bold text-lg'>song</h4>
+                            <p class='text-sm'>Played 50 times</p>
                         </div>
                         <div class='flex items-center justify-between w-24'>
-                            <span class='text-slate-500'>{$songInAlbum->getLength()}</span>
+                            <span class='text-slate-500'>3:45</span>
                                         
                             <a href='?playSong=1' class='hover:text-slate-500 hover:cursor-pointer'>
                                 <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6 inline'>
@@ -34,10 +51,9 @@ class DisplayArtistsAlbums {
                                 </svg>
                             </a>
                         </div>
-                    </div>";}
-            $albums .= "</div>";
-        }
+                    </div></div>";
 
-        return $albums;
+        $this->assertEquals(trim($expected), trim($result));
+
     }
 }
