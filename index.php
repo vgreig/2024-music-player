@@ -11,27 +11,23 @@ require_once 'src/Entities/Album.php';
 
 $db = DatabaseConnector::connect();
 
-$artist = new ArtistsModel($db);
-$allArtists = $artist->getArtistAlbum();
+$artistId = 1;
+$albumId = 2;
 
-$displayAlbums = displayAlbums(10, $allArtists);
+$artists = new ArtistsModel($db);
+$artist = $artists->getArtistById($artistId);
 
 $songs = new SongsModel($db);
-$songsInAlbum = $songs->getSongsByAlbum(2);
+$songsInAlbum = $songs->getSongsByAlbum($albumId);
 
 $albums = new AlbumsModel($db);
-$album = $albums->getAlbumById(2);
+$album = $albums->getAlbumById($albumId);
 
-
-echo '<pre>';
-var_dump($album);
-echo '</pre>';
+$artistsAlbums = $albums->getAlbumsByArtistId($artistId);
 
 echo '<pre>';
-var_dump($songsInAlbum);
+var_dump($artistsAlbums);
 echo '</pre>';
-
-echo $album->getAlbumName();
 
 ?>
 <!DOCTYPE html>
@@ -50,21 +46,21 @@ echo $album->getAlbumName();
         <section class="group-[.minimised]:h-[calc(100%-6rem)] h-3/4 p-12 overflow-auto">
             <div class="flex justify-between">
                 <!--   ARTIST NAME             -->
-                <h2 class="text-4xl font-bold mb-6">Artist name</h2>
+                <h2 class="text-4xl font-bold mb-6"><?php echo $artist->getArtistName(); ?></h2>
                 <a href="artists.html" class="align-top">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 inline">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                     </svg>
-                    back
                 </a>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
 <!--                --><?php
-//                foreach ($displayAlbums as $album) {
-//                    echo "<h4 class='mb-3 text-2xl font-bold'>$album</h4>";
+//                foreach ($artistsAlbums as $singleAlbum) {
+//                    echo "<h4 class='mb-3 text-2xl font-bold'>$singleAlbum->get</h4>";
+//
 //                }
 //
-                ?>
+//                ?>
                 <div class="rounded p-3 bg-cyan-950">
                     <!--ALBUM NAME-->
 

@@ -35,10 +35,11 @@ class ArtistsModel {
         return $query->fetchAll();
     }
 
-//    public function getArtistById()
-//    {
-//        $query = $this->db->prepare();
-//        $query->execute();
-//        return $query->fetch();
-//    }
+    public function getArtistById($id)
+    {
+        $query = $this->db->prepare('SELECT * FROM `artists` WHERE `artists`.`id` = :id;');
+        $query->setFetchMode(PDO::FETCH_CLASS, Artist::class);
+        $query->execute(['id' => $id]);
+        return $query->fetch();
+    }
 }
