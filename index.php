@@ -11,17 +11,9 @@ $artistsModel = new ArtistsModel($db);
 $artistAlbums = new Artist();
 $artists = $artistsModel->getAllArtists();
 $displayArtists = $artistsModel->displayThreeArtists($artists);
-$albumName = $artistAlbums->getAlbumName();
-//function getAlbumCount($artists, $albumName)
-//{
-//    $count = 0;
-//    foreach ($artists as $artist) {
-//        if (
-//            $albumName != $albumName
-//        )
-//    }
-//};
-var_dump($albumName);
+$albumCount = $artistsModel->getAlbumCount();
+
+var_dump($artists);
 
 echo '<!DOCTYPE html>
 <html lang="en">
@@ -48,8 +40,8 @@ echo '<!DOCTYPE html>
                                 <img class='rounded' src='{$artist->getArtworkUrl()}'  />
                             </div>
                             <h4 class='text-xl font-bold'>{$artist->getArtistName()}</h4>
-                            <p>3 Albums</p>
-                            </a>";
+//                            <p>{$artist->getAlbumCount()} Albums</p>
+//                            </a>";
                     }
                        echo '<div class="rounded bg-cyan-950 p-3 flex items-center">
                             <h4 class="text-2xl text-slate-500">+ 16 more</h4>

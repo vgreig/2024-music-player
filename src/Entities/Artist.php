@@ -15,6 +15,18 @@ class Artist {
 
     private int $song_id;
 
+    private int $album_count;
+
+    public function getAlbumCount(): int
+    {
+        return $this->album_count;
+    }
+
+    public function setAlbumCount(int $album_count): void
+    {
+        $this->album_count = $album_count;
+    }
+
     public function getId(): int
     {
         return $this->id;
