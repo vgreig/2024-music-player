@@ -74,6 +74,11 @@ class ArtistsModel
             }
         }
          return $albumsResults;
+
+        foreach ($albumsResults as $album)
+        {
+
+        }
     }
 
 //    public function getAlbumsByArtistId()

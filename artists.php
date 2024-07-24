@@ -3,6 +3,8 @@ require('vendor/autoload.php');
 require_once 'src/DatabaseConnector.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
+require_once 'src/Entities/Album.php';
+require_once 'src/Models/AlbumsModel.php';
 
 
 $db = DatabaseConnector::connect();
@@ -10,20 +12,14 @@ $db = DatabaseConnector::connect();
 $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
-
-$albums = $artistsModel->getArtistAlbums(1);
+$albums = $artistsModel->getArtistAlbums(2);
+$albumsModel = new AlbumsModel($db);
+;
 
 //echo'<pre>';
-//var_dump($albums);
-//echo'</pre>';
-
-foreach ($albums as $album)
-{
-    $album->getArtistName();
-    $album->getAlbumName();
-}
-
-
+////var_dump($albums);
+//echo'<pre>';
+//var_dump($albumByArtist);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,14 +45,14 @@ foreach ($albums as $album)
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
 
                 <?php
-                    $artists = '';
-                    foreach ($albums as $album) {
-                    $artists .= "
+                    $artistLoop = '';
+                    foreach ($artists as $artist) {
+                    $artistLoop .= "
                 <div class='rounded p-3 bg-cyan-950'>
-                    <h4 class='mb-3 text-2xl font-bold'>{$album->getArtistName()}</h4>";
+                    <h4 class='mb-3 text-2xl font-bold'>{$artist->getArtistName()}</h4>";
 
                     foreach ($albums as $album) {
-                        $artists .= "
+                        $artistLoop .= "
                     <div class='mb-3 flex justify-between items-center'>
                         <img src='https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees' />
                         <div class='w-3/4 px-3'>
@@ -69,9 +65,9 @@ foreach ($albums as $album)
                             </svg>
                         </a>
                     </div>"; }
-                $artists .= "</div>";
+                $artistLoop .= "</div>";
                 }
-                    echo $artists;
+                    echo $artistLoop;
                     ?>
             </div>
         </section>
