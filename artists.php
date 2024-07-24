@@ -1,13 +1,12 @@
 <?php
+
 require('vendor/autoload.php');
-require_once 'src/DatabaseConnector.php';
+require_once 'src/Services/DatabaseConnector.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
 require_once 'src/Entities/Album.php';
 require_once 'src/Models/AlbumsModel.php';
 require_once 'src/Services/DisplayArtistsAlbumsService.php';
-
-
 
 $db = DatabaseConnector::connect();
 

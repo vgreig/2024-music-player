@@ -3,12 +3,11 @@
 declare(strict_types=1);
 
 class DisplayArtistsAlbumsService {
-    public static function DisplayArtistsAlbums(array $artists, AlbumsModel $albumsModel): string
+    public static function displayArtistsAlbums(array $artists, AlbumsModel $albumsModel): string
     {
         $artistLoop = '';
         foreach ($artists as $artist) {
-            $artistLoop .= "
-                        <div class='rounded p-3 bg-cyan-950'>
+            $artistLoop .= "<div class='rounded p-3 bg-cyan-950'>
                         <h4 class='mb-3 text-2xl font-bold'>{$artist->getArtistName()}</h4>";
 
             $albums = $albumsModel->getAlbumsByArtistId($artist->getId());

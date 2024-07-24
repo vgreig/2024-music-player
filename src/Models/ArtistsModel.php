@@ -1,5 +1,6 @@
 <?php
-require_once 'src/DatabaseConnector.php';
+
+declare(strict_types=1);
 
 class ArtistsModel
 {
