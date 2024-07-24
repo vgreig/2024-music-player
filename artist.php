@@ -11,9 +11,7 @@ require_once 'src/Entities/Album.php';
 
 $db = DatabaseConnector::connect();
 
-var_dump($_GET);
-
-$artistId = 1;
+$artistId = $_GET['id'];
 
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
