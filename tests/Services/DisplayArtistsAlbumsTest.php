@@ -26,8 +26,6 @@ class DisplayArtistsAlbumsTest extends TestCase {
 
         $result = DisplayArtistsAlbums::displayAlbums([$albumMock], $songsModelMock);
 
-//        exit();
-
         $expected = "                        <div class='rounded p-3 bg-cyan-950'>
                         <h4 class='mb-3 text-2xl font-bold'>album name</h4>
                         

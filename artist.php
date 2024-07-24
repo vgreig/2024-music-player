@@ -11,21 +11,17 @@ require_once 'src/Entities/Album.php';
 
 $db = DatabaseConnector::connect();
 
+var_dump($_GET);
+
 $artistId = 1;
 
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
 
 $songs = new SongsModel($db);
-echo '<pre>';
-var_dump($songs->getSongsByAlbum(6));
-echo '</pre>';
 
 $albums = new AlbumsModel($db);
 $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
-echo '<pre>';
-//var_dump($albums->getAlbumsByArtistId($artistId));
-echo '</pre>';
 
 ?>
 

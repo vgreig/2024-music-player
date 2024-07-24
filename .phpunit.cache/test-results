@@ -1,1 +1,1 @@
-{"version":1,"defects":{"DisplayArtistsAlbumsTest::testDisplayAlbums":7},"times":{"SongTest::testGetLength":0.003,"SongTest::testGetPlayCountIfNull":0,"SongTest::testGetPlayCountIfInt":0,"DisplayArtistsAlbumsTest::testDisplayAlbums":0.009}}
+{"version":1,"defects":{"DisplayArtistsAlbumsTest::testDisplayAlbums":7},"times":{"SongTest::testGetLength":0.002,"SongTest::testGetPlayCountIfNull":0,"SongTest::testGetPlayCountIfInt":0,"DisplayArtistsAlbumsTest::testDisplayAlbums":0.007}}
