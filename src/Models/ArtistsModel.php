@@ -12,12 +12,10 @@ class ArtistsModel
 
     public function getAllArtists()
     {
-        $artistquery = $this->db->prepare('SELECT `artists`.`id`, `artists`.`artist_name`, `albums`.`album_name`, `albums`.`artwork_url`, `albums`.`artist_id`,`songs`.`album_id`,`songs`.`id` AS `song_id`
-        FROM `albums`
-        INNER JOIN `artists`
-        ON `artists`.`id` = `albums`.`artist_id`
-        INNER JOIN `songs`
-        ON `albums`.`id` = `songs`.`album_id`;');
+        // Change this query so it purely gets the list of artists
+        // Without joining the albums
+        $artistquery = $this->db->prepare('SELECT `id`, `artist_name`
+        FROM `artists`;');
         $artistquery->setFetchMode(PDO::FETCH_CLASS, Artist::class);
         $artistquery->execute();
         $artistResults = $artistquery->fetchAll();
@@ -47,8 +45,10 @@ class ArtistsModel
         return $threeArtists;
     }
 
-    public function getArtistAlbums($artistId)
+    public function getArtistAlbums(int $artistId)
     {
+        // This query should just get the list of albums by the artist id
+
         $artistalbums = $this->db->prepare("
         SELECT `artists`.`id`, `artists`.`artist_name`, `albums`.`album_name`, `albums`.`artist_id`, `albums`.`id` AS 'album_id'
 		FROM `artists`
@@ -75,10 +75,10 @@ class ArtistsModel
         }
          return $albumsResults;
 
-        foreach ($albumsResults as $album)
-        {
-
-        }
+//        foreach ($albumsResults as $album)
+//        {
+//
+//        }
     }
 
 //    public function getAlbumsByArtistId()

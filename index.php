@@ -10,10 +10,10 @@ $db = DatabaseConnector::connect();
 $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
+//echo '<pre>';
+//var_dump($artists);
+//exit();
 $displayArtists = $artistsModel->displayThreeArtists($artists);
-$albums = $artistsModel->getArtistAlbums();
-
-
 
 ?>
 <!DOCTYPE html>

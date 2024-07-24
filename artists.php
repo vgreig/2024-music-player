@@ -12,13 +12,11 @@ $db = DatabaseConnector::connect();
 $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
-$albums = $artistsModel->getArtistAlbums(2);
 $albumsModel = new AlbumsModel($db);
-;
 
-//echo'<pre>';
-////var_dump($albums);
-//echo'<pre>';
+echo'<pre>';
+//var_dump($albums);
+echo'</pre>';
 //var_dump($albumByArtist);
 ?>
 <!DOCTYPE html>
@@ -48,9 +46,10 @@ $albumsModel = new AlbumsModel($db);
                     $artistLoop = '';
                     foreach ($artists as $artist) {
                     $artistLoop .= "
-                <div class='rounded p-3 bg-cyan-950'>
-                    <h4 class='mb-3 text-2xl font-bold'>{$artist->getArtistName()}</h4>";
+                        <div class='rounded p-3 bg-cyan-950'>
+                        <h4 class='mb-3 text-2xl font-bold'>{$artist->getArtistName()}</h4>";
 
+                    $albums = $albumsModel->getAlbumsByArtistId($artist->getId());
                     foreach ($albums as $album) {
                         $artistLoop .= "
                     <div class='mb-3 flex justify-between items-center'>
