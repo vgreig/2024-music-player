@@ -12,16 +12,18 @@ class UpdatePlayCount {
         $this->db = $db;
     }
 
-    public function getAlbumWithAllSongs(): array
+    public function UpdateDatabase(): array
     {
         $query = $this->db->prepare('UPDATE `songs`
-                                            SET `play_count` = `play_count` + 1
-                                            WHERE `id` = 1;');
+                                            SET `play_count` = `play_count` + 1 
+                                            WHERE `songs`.`id` = :songId');
+        $query->execute(['songId' => $songId]);
         $query->execute();
 //        return $query->fetchAll();
     }
 
-    public function playCount(): string {
+    public function playCount(): string
+    {
 
             $playButton = "<a href='?playSong=1' class='hover:text-slate-500 hover:cursor-pointer'>
                                 <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6 inline'>
