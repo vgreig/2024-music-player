@@ -9,7 +9,7 @@ require_once 'src/Entities/Album.php';
 
 use PHPUnit\Framework\TestCase;
 
-class DisplayArtistsAlbumsTest extends TestCase {
+class DisplayAlbumsSongsTest extends TestCase {
     public function testDisplayAlbums(): void
     {
         $songMock = $this->createMock(Song::class);
@@ -24,7 +24,7 @@ class DisplayArtistsAlbumsTest extends TestCase {
         $albumMock->method('getAlbumName')->willReturn('album name');
         $albumMock->method('getAlbumId')->willReturn(1);
 
-        $result = DisplayArtistsAlbums::displayAlbums([$albumMock], $songsModelMock);
+        $result = DisplayAlbumsSongs::displayAlbums([$albumMock], $songsModelMock);
 
         $expected = "                        <div class='rounded p-3 bg-cyan-950'>
                         <h4 class='mb-3 text-2xl font-bold'>album name</h4>

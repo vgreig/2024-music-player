@@ -1,41 +1,14 @@
 <?php
 
-class ArtistsModel {
+declare(strict_types=1);
+
+class ArtistsModel
+{
     private PDO $db;
 
     public function __construct(PDO $db)
     {
         $this->db = $db;
-    }
-
-    public function getAllArtists(): array
-    {
-        $query = $this->db->prepare('SELECT `artists`.`id`, `artists`.`artist_name`, `albums`.`id`, `albums`.`album_name`, `albums`.`artwork_url`, `albums`.`artist_id`,`songs`.`album_id`,`songs`.`id` AS `song_id`
-        FROM `albums`
-        INNER JOIN `artists`
-        ON `artists`.`id` = `albums`.`artist_id`
-        INNER JOIN `songs`
-        ON `albums`.`id` = `songs`.`album_id`;');
-        $query->setFetchMode(PDO::FETCH_CLASS, Artist::class);
-        $query->execute();
-        return $query->fetchAll();
-    }
-
-    public function displayThreeArtists($artists): array
-    {
-        shuffle($artists);
-        $threeArtists = array_slice($artists, 0, 3);
-        return $threeArtists;
-    }
-
-    public function getArtistAlbum(): array
-    {
-        $query = $this->db->prepare('SELECT `artists`.`id`, `artists`.`artist_name`, `albums`.`album_name`, `albums`.`artist_id`
-		FROM `artists`
-		INNER JOIN `albums`
-		ON `artists`.`id` = `albums`.`artist_id`;');
-        $query->execute();
-        return $query->fetchAll();
     }
 
     public function getArtistById($id): Artist
@@ -44,5 +17,34 @@ class ArtistsModel {
         $query->setFetchMode(PDO::FETCH_CLASS, Artist::class);
         $query->execute(['id' => $id]);
         return $query->fetch();
+    }
+
+    /**
+     * @return Artist[]
+     */
+    public function getAllArtists(): array
+    {
+        $artistquery = $this->db->prepare('SELECT `id`, `artist_name`
+        FROM `artists`;');
+        $artistquery->setFetchMode(PDO::FETCH_CLASS, Artist::class);
+        $artistquery->execute();
+        $artistResults = $artistquery->fetchAll();
+
+        $albumquery = $this->db->prepare("SELECT `artist_id`, COUNT(`artist_id`) AS 'album_count' 
+        FROM `albums` GROUP BY `artist_id`;");
+        $albumquery->execute();
+        $albumCountResults = $albumquery->fetchAll();
+
+        foreach ($artistResults as $artist)
+        {
+            foreach ($albumCountResults as $album)
+            {
+                if ($artist->getId() === $album['artist_id'])
+                {
+                   $artist->setAlbumCount($album['album_count']);
+                }
+            }
+        }
+        return $artistResults;
     }
 }
