@@ -14,15 +14,15 @@ class DisplayThreeArtistsServiceTest extends TestCase{
 
     public function testDisplayThreeArtistsService(): void {
 
-        $albumsModelMock = $this->createMock(AlbumsModel::class);
         $albumMock = $this->createMock(Album::class);
         $albumMock->method('getArtworkURL')->willReturn('www.google.com');
+        $albumsModelMock = $this->createMock(AlbumsModel::class);
+        $albumsModelMock->method('getAlbumsByArtistId')->willReturn([$albumMock]);
 
         $artistMock = $this->createMock(Artist::class);
         $artistMock->method('getArtistName')->willReturn('bob');
         $artistMock->method('getId')->willReturn(3);
         $artistMock->method('getAlbumCount')->willReturn(2);
-//        $displayArtistsMock = Choose3ArtistsService::choose3Artists($artistMock);
 
         $result = DisplayThreeArtistsService::displayThreeArtistsService([$artistMock],
             $albumsModelMock);
@@ -33,6 +33,6 @@ class DisplayThreeArtistsServiceTest extends TestCase{
                       <p>2 Albums</p>
                      </a>";
 
-        $this->assertEquals(trim($expected), trim($result));
+        $this->assertEquals($expected,$result);
     }
 }
