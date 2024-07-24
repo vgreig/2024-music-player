@@ -3,13 +3,17 @@
 require('vendor/autoload.php');
 require_once 'src/DatabaseConnector.php';
 require_once 'src/Models/ArtistsModel.php';
+require_once 'src/Models/AlbumsModel.php';
 require_once 'src/Entities/Artist.php';
+require_once 'src/Entities/Album.php';
 
 $db = DatabaseConnector::connect();
 
 $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
+$albumsModel = new AlbumsModel($db);
+$album = new Album();
 //echo '<pre>';
 //var_dump($artists);
 //exit();
@@ -33,13 +37,26 @@ $displayArtists = $artistsModel->displayThreeArtists($artists);
                 <div class="">
                     <h3 class="text-xl font-bold mb-3">Artists</h3>
                     <div class="grid grid-cols-2 gap-3 mb-3">
-                    <?php foreach ($displayArtists as $artist) {
+                    <?php foreach ($displayArtists as $artist)
+                    {
+                        $albums = $albumsModel->getAlbumsByArtistId($artist->getId());
                         echo "
                         <a class='rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer'>
-                            <div class='flex gap-2 h-8'>
-                                <img class='rounded' src='{$artist->getArtworkUrl()}' />
-                                <img class='rounded' src='{$artist->getArtworkUrl()}'  />
-                            </div>
+                            <div class='flex gap-2 h-8'>";
+                        $counter = 0;
+                        foreach ($albums as $album)
+                        {
+                            if ($counter === 2) {
+                                break;
+                            }
+                        echo "
+                        <img class='rounded' src='{$album->getArtworkUrl()}' />
+                            ";
+                            $counter++;
+                        }
+                        echo "
+                        </div>
+
                             <h4 class='text-xl font-bold'>{$artist->getArtistName()}</h4>
                             <p>{$artist->getAlbumCount()} Albums</p>
                             </a>";

@@ -53,7 +53,7 @@ echo'</pre>';
                     foreach ($albums as $album) {
                         $artistLoop .= "
                     <div class='mb-3 flex justify-between items-center'>
-                        <img src='https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees' />
+                        <img class='' src='{https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees}' />
                         <div class='w-3/4 px-3'>
                             <h4 class='font-bold text-lg'>{$album->getAlbumName()}</h4>
                             <p class='text-sm'>{$album->getSongCount()} songs</p>
