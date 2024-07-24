@@ -10,7 +10,8 @@ $db = DatabaseConnector::connect();
 $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
-$albums = $artistsModel->getArtistAlbums();
+
+$albums = $artistsModel->getArtistAlbums(1);
 
 //echo'<pre>';
 //var_dump($albums);
@@ -47,10 +48,15 @@ foreach ($albums as $album)
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
 
-                <?php foreach ($albums as $album) {
-                    echo "
+                <?php
+                    $artists = '';
+                    foreach ($albums as $album) {
+                    $artists .= "
                 <div class='rounded p-3 bg-cyan-950'>
-                    <h4 class='mb-3 text-2xl font-bold'>{$album->getArtistName()}</h4>
+                    <h4 class='mb-3 text-2xl font-bold'>{$album->getArtistName()}</h4>";
+
+                    foreach ($albums as $album) {
+                        $artists .= "
                     <div class='mb-3 flex justify-between items-center'>
                         <img src='https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees' />
                         <div class='w-3/4 px-3'>
@@ -62,9 +68,11 @@ foreach ($albums as $album)
                                 <path stroke-linecap='round' stroke-linejoin='round' d='m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' />
                             </svg>
                         </a>
-                    </div>
-                </div>";
-                } ?>
+                    </div>"; }
+                $artists .= "</div>";
+                }
+                    echo $artists;
+                    ?>
             </div>
         </section>
         <section class="group-[.minimised]:py-2 group-[.minimised]:h-24 h-1/4 border-t bg-cyan-950 border-slate-500 p-6">
