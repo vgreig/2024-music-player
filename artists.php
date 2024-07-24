@@ -14,10 +14,6 @@ $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
 $albumsModel = new AlbumsModel($db);
 
-echo'<pre>';
-//var_dump($albums);
-echo'</pre>';
-//var_dump($albumByArtist);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +29,7 @@ echo'</pre>';
         <section class="group-[.minimised]:h-[calc(100%-6rem)] h-3/4 p-12 overflow-auto">
             <div class="flex justify-between">
                 <h2 class="text-4xl font-bold mb-6">Artists</h2>
-                <a href="index.html" class="align-top">
+                <a href="index.php" class="align-top">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 inline">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                     </svg>
@@ -53,12 +49,12 @@ echo'</pre>';
                     foreach ($albums as $album) {
                         $artistLoop .= "
                     <div class='mb-3 flex justify-between items-center'>
-                        <img class='' src='{https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees}' />
+                        <img class='size-14' src='{$album->getArtworkURL()}' />
                         <div class='w-3/4 px-3'>
                             <h4 class='font-bold text-lg'>{$album->getAlbumName()}</h4>
                             <p class='text-sm'>{$album->getSongCount()} songs</p>
                         </div>
-                        <a href='artist.html' class='hover:text-slate-500 hover:cursor-pointer'>
+                        <a href='artist.php?id={$artist->getId()}' class='hover:text-slate-500 hover:cursor-pointer'>
                             <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
                                 <path stroke-linecap='round' stroke-linejoin='round' d='m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' />
                             </svg>
@@ -121,3 +117,4 @@ echo'</pre>';
 </div>
 </body>
 </html>
+
