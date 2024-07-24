@@ -40,13 +40,6 @@ class ArtistsModel
         return $artistResults;
     }
 
-    public function displayThreeArtists($artistResults)
-    {
-        shuffle($artistResults);
-        $threeArtists = array_slice($artistResults, 0, 3);
-        return $threeArtists;
-    }
-
     /**
      * @return Artist[]
      */
