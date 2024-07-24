@@ -16,6 +16,9 @@ class AlbumsModel {
         return $query->fetch();
     }
 
+    /**
+     * @return Album[]
+     */
     public function getAllAlbums(): array
     {
         $query = $this->db->prepare('SELECT `albums`.`id` AS "albumId", `albums`.`album_name` AS "albumName",  
@@ -25,6 +28,9 @@ class AlbumsModel {
         return $query->fetchAll();
     }
 
+    /**
+     * @return Album[]
+     */
     public function getAlbumsByArtistId(int $artistId): array
     {
         $query = $this->db->prepare('SELECT `albums`.`id` AS "albumId", `albums`.`album_name` AS "albumName",  
