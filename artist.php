@@ -5,7 +5,7 @@ require_once 'src/Services/DatabaseConnector.php';
 require_once 'src/Entities/Song.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
-require_once 'src/Services/DisplayArtistsAlbums.php';
+require_once 'src/Services/DisplayAlbumsSongs.php';
 require_once 'src/Models/AlbumsModel.php';
 require_once 'src/Entities/Album.php';
 
@@ -13,7 +13,7 @@ $db = DatabaseConnector::connect();
 
 var_dump($_GET);
 
-$artistId = $_GET['id'];
+$artistId = 1;
 
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
@@ -73,7 +73,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 <?php
-                $albums = DisplayArtistsAlbums::displayAlbums($artistsAlbums, $songs);
+                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs);
                 echo $albums;
                 ?>
             </div>

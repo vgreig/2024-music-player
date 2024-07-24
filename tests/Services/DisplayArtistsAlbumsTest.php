@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once 'src/Services/DisplayArtistsAlbums.php';
+require_once 'src/Services/DisplayAlbumsSongs.php';
 require_once 'src/Models/SongsModel.php';
 require_once 'src/Models/AlbumsModel.php';
 require_once 'src/Entities/Album.php';

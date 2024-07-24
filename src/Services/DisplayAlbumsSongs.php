@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class DisplayArtistsAlbums {
+class DisplayAlbumsSongs {
     public static function displayAlbums(array $artistsAlbums, SongsModel $songs): string
     {
         $albums = '';
