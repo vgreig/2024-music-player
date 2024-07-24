@@ -8,7 +8,7 @@ class Song {
     private ?int $playCount;
     private int $songId;
 
-    public function __construct(string $songName = '', float $length = 0, ?int $playCount = 0)
+    public function __construct(string $songName = '', float $length = 0, ?int $playCount = 0, int $songId = 0)
     {
         $this->songName = $songName;
         $this->length = $length;
