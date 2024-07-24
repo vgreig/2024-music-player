@@ -12,6 +12,10 @@ $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
 $albums = $artistsModel->getArtistAlbums();
 
+echo'<pre>';
+var_dump($albums);
+echo'</pre>';
+
 foreach ($albums as $album)
 {
     $album->getArtistName();
@@ -50,8 +54,8 @@ foreach ($albums as $album)
                     <div class='mb-3 flex justify-between items-center'>
                         <img src='https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees' />
                         <div class='w-3/4 px-3'>
-                            <h4 class='font-bold text-lg'>Album name</h4>
-                            <p class='text-sm'>4 songs</p>
+                            <h4 class='font-bold text-lg'>{$album->getAlbumName()}</h4>
+                            <p class='text-sm'>{$album->getSongCount()} songs</p>
                         </div>
                         <a href='artist.html' class='hover:text-slate-500 hover:cursor-pointer'>
                             <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
