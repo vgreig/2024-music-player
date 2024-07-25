@@ -13,6 +13,11 @@ $db = DatabaseConnector::connect();
 
 $artistId = $_GET['id'];
 
+if (isset($_GET['songId'])) {
+    $songId = (int)$_GET['songId'];
+    $songModel->updateFavouriteStatus($songId);
+}
+
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
 

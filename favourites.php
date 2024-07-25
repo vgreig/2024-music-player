@@ -8,34 +8,19 @@ require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Models/SongsModel.php';
 require_once 'src/Entities/Song.php';
 require_once 'src/Entities/Artist.php';
+require_once 'src/Services/DisplayFartistService.php';
 
 $db = DatabaseConnector::connect();
-//$artist = new Artist();
+
 $artists = new ArtistsModel($db);
 $songModel = new SongsModel($db);
-//$song = new Song();
 
 $favArtists = $artists->getFavouriteArtists();
 
-function displayFartistSongs(array $favArtists, SongsModel $songModel): string
-    {
-        $output = '';
-        foreach ($favArtists as $fartist){
-
-
-            $faveSongs = $songModel->getFavouriteSongsByArtist($fartist->getId());
-
-            $output .= $fartist->getArtistName() . " ";
-
-            foreach($faveSongs as $song){
-                $output.= $song->getSongName()." ".$song->getPlayCount()." ".$song->getLength();
-            }
-        }
-
-        return $output;
-    }
-
-echo displayFartistSongs($favArtists, $songModel);
+if (isset($_GET['id'])) {
+    $songId = (int)$_GET['id'];
+    $songModel->updateFavouriteStatus($songId);
+}
 
 ?>
 
@@ -81,71 +66,11 @@ echo displayFartistSongs($favArtists, $songModel);
                     <h2 class="text-4xl font-bold mb-6">Favourites</h2>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+                    <?php
 
-                    <div class="rounded p-3 bg-cyan-950">
-                        <h4 class="mb-3 text-2xl font-bold">Artist name</h4>
-                        <div class="mx-3 mb-3 flex justify-between items-center">
-                            <div class="w-3/4 pe-3">
-                                <h4 class="font-bold text-lg">Song name</h4>
-                                <p class="text-sm">Played 4 times</p>
-                            </div>
-                            <div class="flex items-center justify-between w-24">
-                                <span class="text-slate-500">3:36</span>
-                                <a href="?playSong=1" class="hover:text-slate-500 hover:cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"></path>
-                                    </svg>
-                                </a>
-                                <a href="favourite.php?id=" class="hover:text-slate-500 hover:cursor-pointer text-orange-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                                        <path fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="mx-3 mb-3 flex justify-between items-center">
-                            <div class="w-3/4 pe-3">
-                                <h4 class="font-bold text-lg">Song name</h4>
-                                <p class="text-sm">Played 4 times</p>
-                            </div>
-                            <div class="flex items-center justify-between w-24">
-                                <span class="text-slate-500">3:36</span>
-                                <button data-action="play" class="hover:text-slate-500 hover:cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"></path>
-                                    </svg>
-                                </button>
-                                <a href="favourite.php?id=" class="hover:text-slate-500 hover:cursor-pointer text-orange-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                                        <path fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="mx-3 mb-3 flex justify-between items-center">
-                            <div class="w-3/4 pe-3">
-                                <h4 class="font-bold text-lg">Song name</h4>
-                                <p class="text-sm">Played 4 times</p>
-                            </div>
-                            <div class="flex items-center justify-between w-24">
-                                <span class="text-slate-500">3:36</span>
-                                <a href="?playSong=1" class="hover:text-slate-500 hover:cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"></path>
-                                    </svg>
-                                </a>
-                                <a href="favourite.php?id=" class="hover:text-slate-500 hover:cursor-pointer text-orange-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                                        <path fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    echo DisplayFartistService::displayFartistSongs($favArtists, $songModel);
+
+                    ?>
             </section>
             <section class="group-[.minimised]:py-2 group-[.minimised]:h-24 h-1/4 border-t bg-cyan-950 border-slate-500 p-6">
                 <div class="group-[.minimised]:hidden flex justify-between mb-5">

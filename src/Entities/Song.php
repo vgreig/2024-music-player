@@ -7,10 +7,16 @@ class Song {
     private float $length;
     private ?int $playCount;
     private int $favourite;
+    private int $songId;
 
     public function getFavourite(): int
     {
         return $this->favourite;
+    }
+
+    public function getSongId(): int
+    {
+        return $this->songId;
     }
 
     public function __construct(string $songName = '', float $length = 0, ?int $playCount = 0)
@@ -37,4 +43,6 @@ class Song {
         }
         return $this->playCount;
     }
+
+
 }
