@@ -20,7 +20,7 @@ class SongsModel {
 
     public function getSongsByAlbum(int $id): array
     {
-        $query = $this->db->prepare('SELECT `songs`.`id` AS "songId", `songs`.`song_name` AS "songName", `songs`.`length`, 
+        $query = $this->db->prepare('SELECT `songs`.`id` AS "songId", `songs`.`song_name` AS "songName", `songs`.`length`, `songs`.`favourite`, 
         `songs`.`play_count` AS "playCount" FROM `songs` INNER JOIN `albums` ON `songs`.`album_id` = `albums`.`id` 
         WHERE `albums`.`id` = :id;');
         $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, Song::class);
@@ -50,7 +50,7 @@ class SongsModel {
     public function getFavouriteSongsByArtist(int $artistId): array
     {
         $query = $this->db->prepare('SELECT `songs`.`song_name` AS "songName", `songs`.`play_count` AS "playCount", 
-       `songs`.`length`, `songs`.`id` AS "songId"
+       `songs`.`length`, `songs`.`id` AS "songId", `songs`.`favourite`
         FROM `songs`
         INNER JOIN `albums` ON `songs`.`album_id` = `albums`.`id`
         INNER JOIN `artists` ON `artists`.`id` = `albums`.`artist_id`

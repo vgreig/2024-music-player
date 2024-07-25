@@ -13,11 +13,6 @@ $db = DatabaseConnector::connect();
 
 $artistId = $_GET['id'];
 
-if (isset($_GET['songId'])) {
-    $songId = (int)$_GET['songId'];
-    $songModel->updateFavouriteStatus($songId);
-}
-
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
 
@@ -25,6 +20,11 @@ $songs = new SongsModel($db);
 
 $albums = new AlbumsModel($db);
 $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
+
+if (isset($_GET['songId'])) {
+    $songId = (int)$_GET['songId'];
+    $songs->updateFavouriteStatus($songId);
+}
 
 ?>
 
@@ -49,7 +49,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
         </a>
-        <a href="favourites.html" class="p-12 hover:text-slate-500">
+        <a href="favourites.php" class="p-12 hover:text-slate-500">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
             </svg>
@@ -76,7 +76,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 <?php
-                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs);
+                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs, $artistId);
                 echo $albums;
                 ?>
             </div>
