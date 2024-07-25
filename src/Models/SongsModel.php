@@ -40,7 +40,7 @@ class SongsModel {
         return $query->fetchAll();
     }
 
-    public function updateDatabase(int $songId): bool
+    public function updatePlayCount(int $songId): bool
     {
         $query = $this->db->prepare('UPDATE `songs`
                                             SET `play_count` = `play_count` + 1
