@@ -14,7 +14,7 @@ $db = DatabaseConnector::connect();
 
 $artistId = $_GET['id'];
 
-$songId = $_GET['id'];
+$playId = $_GET['id'];
 
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
@@ -23,6 +23,13 @@ $songs = new SongsModel($db);
 
 $albums = new AlbumsModel($db);
 $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
+
+//max's
+$updatePlayCount = new UpdatePlayCount($db);
+if (isset($_GET['playSong'])) {
+    $playId = intval($_GET['playSong']);
+}
+var_dump($updatePlayCount->updateDatabase($playId));
 
 ?>
 
@@ -74,7 +81,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 <?php
-                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs, $songId);
+                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs, $playId);
                 echo $albums;
                 ?>
             </div>
