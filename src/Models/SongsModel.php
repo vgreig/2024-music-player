@@ -37,4 +37,10 @@ class SongsModel {
         $query->execute(['id' => $id]);
         return $query->fetchAll();
     }
+
+    public function updateFavouriteStatus(int $id): int
+    {
+        $query = $this->db->prepare('UPDATE `songs` SET `favourite` = NOT `favourite` WHERE `id` = :id;');
+        return $query->execute(['id' => $id]);
+        }
 }

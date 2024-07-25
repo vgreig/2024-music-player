@@ -7,6 +7,13 @@ class Song {
     private float $length;
     private ?int $playCount;
 
+    private int $favourite;
+
+    public function getFavourite(): int
+    {
+        return $this->favourite;
+    }
+
     public function __construct(string $songName = '', float $length = 0, ?int $playCount = 0)
     {
         $this->songName = $songName;
