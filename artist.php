@@ -14,6 +14,8 @@ $db = DatabaseConnector::connect();
 
 $artistId = $_GET['id'];
 
+$songId = $_GET['id'];
+
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
 
@@ -72,7 +74,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 <?php
-                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs);
+                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs, $songId);
                 echo $albums;
                 ?>
             </div>
