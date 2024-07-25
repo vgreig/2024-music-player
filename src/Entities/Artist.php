@@ -25,3 +25,4 @@ class Artist {
         $this->album_count = $album_count;
     }
 }
+

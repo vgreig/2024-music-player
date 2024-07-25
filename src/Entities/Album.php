@@ -1,4 +1,5 @@
 <?php
+
 class Album {
     private int $albumId;
     private string $albumName;
@@ -36,3 +37,4 @@ class Album {
         $this->song_count = $song_count;
     }
 }
+

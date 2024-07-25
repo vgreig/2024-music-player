@@ -11,6 +11,14 @@ class ArtistsModel
         $this->db = $db;
     }
 
+    public function getArtistById($id): Artist
+    {
+        $query = $this->db->prepare('SELECT * FROM `artists` WHERE `artists`.`id` = :id;');
+        $query->setFetchMode(PDO::FETCH_CLASS, Artist::class);
+        $query->execute(['id' => $id]);
+        return $query->fetch();
+    }
+
     /**
      * @return Artist[]
      */
@@ -38,37 +46,5 @@ class ArtistsModel
             }
         }
         return $artistResults;
-    }
-
-    /**
-     * @return Artist[]
-     */
-    public function getArtistAlbums(int $artistId)
-    {
-        $artistalbums = $this->db->prepare("
-        SELECT `artists`.`id`, `artists`.`artist_name`, `albums`.`album_name`, `albums`.`artist_id`, `albums`.`id` AS 'album_id'
-		FROM `artists`
-		INNER JOIN `albums`
-		ON `artists`.`id` = `albums`.`artist_id`
-        WHERE `albums`.`artist_id` = :artistId;");
-        $artistalbums->setFetchMode(PDO::FETCH_CLASS, Artist::class);
-        $artistalbums->execute(['artistId' => $artistId]);
-        $albumsResults = $artistalbums->fetchAll();
-
-        $songquery = $this->db->prepare("SELECT `album_id`, COUNT(`album_id`) AS 'song_count' FROM `songs` GROUP BY `album_id`;");
-        $songquery->execute();
-        $songresults = $songquery->fetchAll();
-
-        foreach ($albumsResults as $album)
-        {
-            foreach ($songresults as $song)
-            {
-                if ($album->getAlbumId() === $song['album_id'])
-                {
-                    $album->setSongCount($song['song_count']);
-                }
-            }
-        }
-         return $albumsResults;
     }
 }
