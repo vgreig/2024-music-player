@@ -30,12 +30,12 @@ class UpdatePlayCount {
         return $playButton;
     }
 
-    public function updateDatabase(int $id): array
+    public function updateDatabase(int $songId): array
     {
         $query = $this->db->prepare('UPDATE `songs`
                                             SET `play_count` = `play_count` + 1
                                             WHERE `songs`.`id` = :songId');
-        $query->execute(['songId' => $id]);
+        $query->execute(['songId' => $songId]);
         return $query->fetchAll();
     }
 
