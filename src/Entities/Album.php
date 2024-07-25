@@ -5,6 +5,7 @@ class Album {
     private string $albumName;
     private string $artworkURL;
     private int $artistId;
+    private int $song_count;
 
     public function getAlbumId(): int
     {
@@ -25,4 +26,15 @@ class Album {
     {
         return $this->artistId;
     }
+
+    public function getSongCount(): int
+    {
+        return $this->song_count;
+    }
+
+    public function setSongCount(int $song_count): void
+    {
+        $this->song_count = $song_count;
+    }
 }
+

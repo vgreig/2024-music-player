@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once 'src/Entities/Song.php';
+
 class SongsModel {
     private PDO $db;
 

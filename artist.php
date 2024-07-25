@@ -5,15 +5,13 @@ require_once 'src/Services/DatabaseConnector.php';
 require_once 'src/Entities/Song.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
-require_once 'src/Services/DisplayArtistsAlbums.php';
+require_once 'src/Services/DisplayAlbumsSongs.php';
 require_once 'src/Models/AlbumsModel.php';
 require_once 'src/Entities/Album.php';
 
 $db = DatabaseConnector::connect();
 
-var_dump($_GET);
-
-$artistId = 1;
+$artistId = $_GET['id'];
 
 $artists = new ArtistsModel($db);
 $artist = $artists->getArtistById($artistId);
@@ -36,7 +34,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
 <body>
 <div class="h-screen w-full bg-blue-950 flex text-white">
     <nav class="h-screen border-r bg-cyan-950 border-slate-500 flex flex-col justify-evenly items-center">
-        <a href="index.html" class="p-12 hover:text-slate-500">
+        <a href="index.php" class="p-12 hover:text-slate-500">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
@@ -65,7 +63,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
         <section class="group-[.minimised]:h-[calc(100%-6rem)] h-3/4 p-12 overflow-auto">
             <div class="flex justify-between">
                 <h2 class="text-4xl font-bold mb-6"><?php echo $artist->getArtistName(); ?></h2>
-                <a href="artists.html" class="align-top">
+                <a href="artists.php" class="align-top">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 inline">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                     </svg>
@@ -73,7 +71,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 <?php
-                $albums = DisplayArtistsAlbums::displayAlbums($artistsAlbums, $songs);
+                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs);
                 echo $albums;
                 ?>
             </div>
