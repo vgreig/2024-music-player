@@ -6,7 +6,6 @@ class Song {
     private string $songName;
     private float $length;
     private ?int $playCount;
-
     private int $favourite;
 
     public function getFavourite(): int

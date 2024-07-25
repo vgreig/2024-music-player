@@ -42,19 +42,22 @@ class SongsModel {
     {
         $query = $this->db->prepare('UPDATE `songs` SET `favourite` = NOT `favourite` WHERE `id` = :id;');
         return $query->execute(['id' => $id]);
-        }
+    }
 
-        public function getFavouriteSongsByArtist(int $artistId): array
-        {
-            $query = $this->db->prepare('SELECT `artists`.`artist_name`, `songs`.`id` AS "songId", 
-             `songs`.`song_name`, `songs`.`play_count`, `songs`.`length`
-                FROM `songs`
-                INNER JOIN `albums` ON `songs`.`album_id` = `albums`.`id`
-                INNER JOIN `artists` ON `artists`.`id` = `albums`.`artist_id`
-                WHERE `songs`.`favourite` = 1
-                AND `artists`.`id` = :artistId;');
-            $query->setFetchMode(PDO::FETCH_CLASS, Song::class);
-            $query->execute(['artistId' => $artistId]);
-            return $query->fetchAll();
-        }
+    /**
+     * @param int $artistId
+     * @return array
+     */
+    public function getFavouriteSongsByArtist(int $artistId): array
+    {
+        $query = $this->db->prepare('SELECT `songs`.`song_name` AS "songName", `songs`.`play_count` AS "playCount", `songs`.`length`
+        FROM `songs`
+        INNER JOIN `albums` ON `songs`.`album_id` = `albums`.`id`
+        INNER JOIN `artists` ON `artists`.`id` = `albums`.`artist_id`
+        WHERE `songs`.`favourite` = 1
+        AND `artists`.`id` = :artistId;');
+        $query->setFetchMode(PDO::FETCH_CLASS,Song::class);
+        $query->execute(['artistId' => $artistId]);
+        return $query->fetchAll();
+    }
 }
