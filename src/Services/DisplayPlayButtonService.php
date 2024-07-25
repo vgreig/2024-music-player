@@ -2,13 +2,7 @@
 
 declare(strict_types=1);
 
-require_once 'src/Services/DatabaseConnector.php';
-require_once 'src/Models/SongsModel.php';
-require_once 'src/Entities/Song.php';
-require_once 'src/Services/DisplayAlbumsSongs.php';
-require_once 'artist.php';
-
-class UpdatePlayCount {
+class DisplayPlayButtonService {
     private PDO $db;
 
     public function __construct(PDO $db)
@@ -27,15 +21,4 @@ class UpdatePlayCount {
 
         return $playButton;
     }
-
-    public function updateDatabase(int $songId): bool
-    {
-        $query = $this->db->prepare('UPDATE `songs`
-                                            SET `play_count` = `play_count` + 1
-                                            WHERE `songs`.`id` = :songId');
-        return $query->execute(['songId' => $songId]);
-
-    }
-
-
 }

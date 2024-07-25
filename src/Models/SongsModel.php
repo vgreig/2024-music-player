@@ -39,4 +39,12 @@ class SongsModel {
         $query->execute(['id' => $id]);
         return $query->fetchAll();
     }
+
+    public function updateDatabase(int $songId): bool
+    {
+        $query = $this->db->prepare('UPDATE `songs`
+                                            SET `play_count` = `play_count` + 1
+                                            WHERE `songs`.`id` = :songId');
+        return $query->execute(['songId' => $songId]);
+    }
 }

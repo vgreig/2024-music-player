@@ -24,9 +24,10 @@ $songs = new SongsModel($db);
 $albums = new AlbumsModel($db);
 $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
 
-$updatePlayCount = new UpdatePlayCount($db);
+$updatePlayCount = new SongsModel($db);
 if (isset($_GET['playSong'])) {
     $songId = intval($_GET['playSong']);
+    $updatePlayCount->updateDatabase($songId);
 }
 
 ?>
