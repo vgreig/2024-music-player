@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once 'src/Services/PlayCountService.php';
+
 class DisplayArtistsAlbumsService {
     public static function displayArtistsAlbums(array $artists, AlbumsModel $albumsModel): string
     {

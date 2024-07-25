@@ -8,6 +8,7 @@ require_once 'src/Entities/Album.php';
 require_once 'src/Services/DisplayThreeArtistsService.php';
 require_once 'src/Services/Choose3ArtistsService.php';
 require_once 'src/Models/SongsModel.php';
+require_once 'src/Services/PlayCountService.php';
 
 $db = DatabaseConnector::connect();
 
