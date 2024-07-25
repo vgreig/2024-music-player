@@ -12,26 +12,30 @@ require_once 'src/Entities/Artist.php';
 $db = DatabaseConnector::connect();
 //$artist = new Artist();
 $artists = new ArtistsModel($db);
-$song= new SongsModel($db);
-$output= '';
+$songModel = new SongsModel($db);
+//$song = new Song();
 
-$allartists= $artists->getAllArtists();
+$favArtists = $artists->getFavouriteArtists();
 
-foreach ($allartists as $artist){
-   $artistId = $artist->getId();
-   $favesongs = $song->getFavouriteSongsByArtist($artistId);
-   var_dump($favesongs);
-  $output.= $artist->getArtistName();
-   if ($favesongs){
-       foreach($favesongs as $song){
-         $output.= $song->getSongName().
-             $song->getPlayCount().
-             $song->getLength();
-       }
-   }
-}
+function displayFartistSongs(array $favArtists, SongsModel $songModel): string
+    {
+        $output = '';
+        foreach ($favArtists as $fartist){
 
 
+            $faveSongs = $songModel->getFavouriteSongsByArtist($fartist->getId());
+
+            $output .= $fartist->getArtistName() . " ";
+
+            foreach($faveSongs as $song){
+                $output.= $song->getSongName()." ".$song->getPlayCount()." ".$song->getLength();
+            }
+        }
+
+        return $output;
+    }
+
+echo displayFartistSongs($favArtists, $songModel);
 
 ?>
 

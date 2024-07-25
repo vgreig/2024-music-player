@@ -50,7 +50,7 @@ class ArtistsModel
     /**
      * @return Artist[]
      */
-    public function getFavouritedArtists(): array
+    public function getFavouriteArtists(): array
     {
         $favquery = $this->db->prepare('SELECT `artists`.`artist_name`, `artists`.`id`
                 FROM `songs`

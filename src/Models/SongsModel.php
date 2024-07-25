@@ -45,8 +45,7 @@ class SongsModel {
     }
 
     /**
-     * @param int $artistId
-     * @return array
+     * @return Song[]
      */
     public function getFavouriteSongsByArtist(int $artistId): array
     {
@@ -56,7 +55,7 @@ class SongsModel {
         INNER JOIN `artists` ON `artists`.`id` = `albums`.`artist_id`
         WHERE `songs`.`favourite` = 1
         AND `artists`.`id` = :artistId;');
-        $query->setFetchMode(PDO::FETCH_CLASS,Song::class);
+        $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,Song::class);
         $query->execute(['artistId' => $artistId]);
         return $query->fetchAll();
     }
