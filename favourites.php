@@ -15,12 +15,12 @@ $db = DatabaseConnector::connect();
 $artists = new ArtistsModel($db);
 $songModel = new SongsModel($db);
 
-$favArtists = $artists->getFavouriteArtists();
-
 if (isset($_GET['id'])) {
     $songId = (int)$_GET['id'];
     $songModel->updateFavouriteStatus($songId);
 }
+
+$favArtists = $artists->getFavouriteArtists();
 
 ?>
 
