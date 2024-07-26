@@ -6,6 +6,7 @@ require_once 'src/Entities/Song.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
 require_once 'src/Services/DisplayAlbumsSongs.php';
+require_once 'src/Services/DisplayArtistsAlbumsService.php';
 require_once 'src/Models/AlbumsModel.php';
 require_once 'src/Entities/Album.php';
 
@@ -24,6 +25,12 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
 if (isset($_GET['songId'])) {
     $songId = (int)$_GET['songId'];
     $songs->updateFavouriteStatus($songId);
+}
+
+$updatePlayCount = new SongsModel($db);
+if (isset($_GET['playSong'])) {
+    $songId = intval($_GET['playSong']);
+    $updatePlayCount->updatePlayCount($songId);
 }
 
 ?>
