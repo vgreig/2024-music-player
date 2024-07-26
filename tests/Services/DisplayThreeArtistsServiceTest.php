@@ -27,7 +27,7 @@ class DisplayThreeArtistsServiceTest extends TestCase{
         $result = DisplayThreeArtistsService::displayThreeArtistsService([$artistMock],
             $albumsModelMock);
 
-        $expected = "<a class='rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer'>
+        $expected = "<a href='artist.php?id=3' class='rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer'>
                         <div class='flex gap-2 h-8'><img class='rounded' src='www.google.com' /></div>
                      <h4 class='text-xl font-bold'>bob</h4>
                       <p>2 Albums</p>
