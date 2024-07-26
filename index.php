@@ -1,6 +1,5 @@
 <?php
 
-require('vendor/autoload.php');
 require_once 'src/Services/DatabaseConnector.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Models/AlbumsModel.php';
@@ -8,6 +7,8 @@ require_once 'src/Entities/Artist.php';
 require_once 'src/Entities/Album.php';
 require_once 'src/Services/DisplayThreeArtistsService.php';
 require_once 'src/Services/Choose3ArtistsService.php';
+require_once 'src/Models/SongsModel.php';
+require_once 'src/Services/DisplayPlayButtonService.php';
 
 $db = DatabaseConnector::connect();
 

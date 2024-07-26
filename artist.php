@@ -6,6 +6,7 @@ require_once 'src/Entities/Song.php';
 require_once 'src/Models/ArtistsModel.php';
 require_once 'src/Entities/Artist.php';
 require_once 'src/Services/DisplayAlbumsSongs.php';
+require_once 'src/Services/DisplayArtistsAlbumsService.php';
 require_once 'src/Models/AlbumsModel.php';
 require_once 'src/Entities/Album.php';
 
@@ -20,6 +21,12 @@ $songs = new SongsModel($db);
 
 $albums = new AlbumsModel($db);
 $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
+
+$updatePlayCount = new SongsModel($db);
+if (isset($_GET['playSong'])) {
+    $songId = intval($_GET['playSong']);
+    $updatePlayCount->updatePlayCount($songId);
+}
 
 ?>
 
@@ -71,7 +78,7 @@ $artistsAlbums = $albums->getAlbumsByArtistId($artistId);
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 <?php
-                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs);
+                $albums = DisplayAlbumsSongs::displayAlbums($artistsAlbums, $songs, $artistId);
                 echo $albums;
                 ?>
             </div>
