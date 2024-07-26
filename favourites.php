@@ -1,21 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 require('vendor/autoload.php');
 require_once 'src/Services/DatabaseConnector.php';
 require_once 'src/Models/ArtistsModel.php';
+require_once 'src/Models/SongsModel.php';
+require_once 'src/Entities/Song.php';
 require_once 'src/Entities/Artist.php';
-require_once 'src/Entities/Album.php';
-require_once 'src/Models/AlbumsModel.php';
-require_once 'src/Services/DisplayArtistsAlbumsService.php';
+require_once 'src/Services/DisplayFartistService.php';
+require_once 'src/Services/DisplayPlayButtonService.php';
 
 $db = DatabaseConnector::connect();
+$artists = new ArtistsModel($db);
+$songModel = new SongsModel($db);
 
-$artistsModel = new ArtistsModel($db);
-$artist = new Artist();
-$artists = $artistsModel->getAllArtists();
-$albumsModel = new AlbumsModel($db);
+if (isset($_GET['id'])) {
+    $songId = (int)$_GET['id'];
+    $songModel->updateFavouriteStatus($songId);
+}
+
+$favArtists = $artists->getFavouriteArtists();
+
+if (isset($_GET['playSong'])) {
+    $songId = intval($_GET['playSong']);
+    $songModel->updatePlayCount($songId);
+}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,20 +68,14 @@ $albumsModel = new AlbumsModel($db);
         <main class="group grow h-screen">
             <section class="group-[.minimised]:h-[calc(100%-6rem)] h-3/4 p-12 overflow-auto">
                 <div class="flex justify-between">
-                    <h2 class="text-4xl font-bold mb-6">Artists</h2>
-                    <a href="index.php" class="align-top">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 inline">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                        </svg>
-                        back
-                    </a>
+                    <h2 class="text-4xl font-bold mb-6">Favourites</h2>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-
                     <?php
-                    echo DisplayArtistsAlbumsService::DisplayArtistsAlbums($artists, $albumsModel);
-                        ?>
-                </div>
+
+                    echo DisplayFartistService::displayFartistSongs($favArtists, $songModel);
+
+                    ?>
             </section>
             <section class="group-[.minimised]:py-2 group-[.minimised]:h-24 h-1/4 border-t bg-cyan-950 border-slate-500 p-6">
                 <div class="group-[.minimised]:hidden flex justify-between mb-5">
@@ -121,4 +128,5 @@ $albumsModel = new AlbumsModel($db);
     </div>
 </body>
 </html>
+
 

@@ -47,4 +47,20 @@ class ArtistsModel
         }
         return $artistResults;
     }
+    /**
+     * @return Artist[]
+     */
+    public function getFavouriteArtists(): array
+    {
+        $favquery = $this->db->prepare('SELECT `artists`.`artist_name`, `artists`.`id`
+                FROM `songs`
+                INNER JOIN `albums` ON `songs`.`album_id` = `albums`.`id`
+                INNER JOIN `artists` ON `artists`.`id` = `albums`.`artist_id`
+                WHERE `songs`.`favourite` = 1
+                GROUP BY `artist_name`;');
+
+        $favquery->setFetchMode(PDO::FETCH_CLASS,Artist::class);
+        $favquery->execute();
+        return $favquery->fetchAll();
+    }
 }
