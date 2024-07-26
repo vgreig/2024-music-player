@@ -24,17 +24,20 @@ class DisplayAlbumsSongs {
                             <p class='text-sm'>Played {$songInAlbum->getPlayCount()} times</p>
                         </div>
                         <div class='flex items-center justify-between w-24'>
-                            <span class='text-slate-500'>{$songInAlbum->getLength()}</span>
-                            <a href='artist.php?id={$artistId}&songId={$songInAlbum->getSongId()}' class='hover:text-slate-500 hover:cursor-pointer'>
+                            <span class='text-slate-500'>{$songInAlbum->getLength()}</span>";
+                            $albums .=  DisplayPlayButtonService::playCount($artistId, $songInAlbum->getSongId()).
+                            "<a href='artist.php?id={$artistId}&songId={$songInAlbum->getSongId()}' class='hover:text-slate-500 hover:cursor-pointer'>
                                 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke-width='1.5' 
                                 ";
 
                                 if ($songInAlbum->getFavourite() === 1) {
                                     $albums .= "stroke='currentColor' fill='currentColor' class='size-6 text-orange-500'";
-                                } else {$albums .= "stroke='currentColor' fill='none' class='size-6'";}
+                                } else {
+                                    $albums .= "stroke='currentColor' fill='none' class='size-6'";
+                                }
                                    $albums .= "><path stroke-linecap='round' stroke-linejoin='round' d='M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z' />
-                            <span class='text-slate-500'></span>";
-                $albums .=  DisplayPlayButtonService::playCount($artistId, $songInAlbum->getSongId());
+                            </svg></a><span class='text-slate-500'></span>";
+
                 $albums .= "
                         </div>
                     </div>";}
