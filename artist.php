@@ -27,10 +27,9 @@ if (isset($_GET['songId'])) {
     $songs->updateFavouriteStatus($songId);
 }
 
-$updatePlayCount = new SongsModel($db);
 if (isset($_GET['playSong'])) {
     $songId = intval($_GET['playSong']);
-    $updatePlayCount->updatePlayCount($songId);
+    $songs->updatePlayCount($songId);
 }
 
 ?>

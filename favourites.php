@@ -9,9 +9,9 @@ require_once 'src/Models/SongsModel.php';
 require_once 'src/Entities/Song.php';
 require_once 'src/Entities/Artist.php';
 require_once 'src/Services/DisplayFartistService.php';
+require_once 'src/Services/DisplayPlayButtonService.php';
 
 $db = DatabaseConnector::connect();
-
 $artists = new ArtistsModel($db);
 $songModel = new SongsModel($db);
 
@@ -21,6 +21,11 @@ if (isset($_GET['id'])) {
 }
 
 $favArtists = $artists->getFavouriteArtists();
+
+if (isset($_GET['playSong'])) {
+    $songId = intval($_GET['playSong']);
+    $songModel->updatePlayCount($songId);
+}
 
 ?>
 
