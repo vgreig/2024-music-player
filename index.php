@@ -9,6 +9,7 @@ require_once 'src/Services/DisplayThreeArtistsService.php';
 require_once 'src/Services/Choose3ArtistsService.php';
 require_once 'src/Models/SongsModel.php';
 require_once 'src/Services/DisplayPlayButtonService.php';
+require_once 'src/Services/DisplayPopAlbumService.php';
 
 $db = DatabaseConnector::connect();
 
@@ -16,6 +17,7 @@ $artistsModel = new ArtistsModel($db);
 $artist = new Artist();
 $artists = $artistsModel->getAllArtists();
 $albumsModel = new AlbumsModel($db);
+$popularAlbums = $albumsModel->getPopularAlbums();
 $album = new Album();
 $displayArtists = Choose3ArtistsService::choose3Artists($artists);
 
@@ -75,6 +77,19 @@ $displayArtists = Choose3ArtistsService::choose3Artists($artists);
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
                         </a>
+                    </div>
+                    <div class="">
+                        <h3 class="text-xl font-bold mb-3">Most Popular Albums</h3>
+                        <?php
+                        foreach ($popularAlbums as $popularAlbum) {
+                            $artworkURL = $popularAlbum->getArtworkURL();
+                            $albumName = $popularAlbum->getAlbumName();
+                            $albumArtist = $popularAlbum->getAlbumArtist();
+                            $albumArtistId = $popularAlbum->getArtistId();
+
+                            echo DisplayPopAlbumService::displayPopularAlbums($artworkURL, $albumName, $albumArtist, $albumArtistId);
+                        }
+                        ?>
                     </div>
                 </div>
             </section>

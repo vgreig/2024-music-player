@@ -6,6 +6,18 @@ class Album {
     private string $artworkURL;
     private int $artistId;
     private int $song_count;
+    private string $albumArtist;
+    private int $totalPlayCount;
+
+    public function getAlbumArtist(): string
+    {
+        return $this->albumArtist;
+    }
+
+    public function getTotalPlayCount(): int
+    {
+        return $this->totalPlayCount;
+    }
 
     public function getAlbumId(): int
     {
