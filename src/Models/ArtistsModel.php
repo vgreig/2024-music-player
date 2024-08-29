@@ -11,6 +11,9 @@ class ArtistsModel
         $this->db = $db;
     }
 
+    /**
+     * @return Artist[]
+     */
     public function getArtistById($id): Artist
     {
         $query = $this->db->prepare('SELECT * FROM `artists` WHERE `artists`.`id` = :id;');

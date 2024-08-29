@@ -85,9 +85,9 @@ $displayArtists = Choose3ArtistsService::choose3Artists($artists);
                             $artworkURL = $popularAlbum->getArtworkURL();
                             $albumName = $popularAlbum->getAlbumName();
                             $albumArtist = $popularAlbum->getAlbumArtist();
-                            $albumArtistId = $popularAlbum->getArtistId();
+                            $artistId = $popularAlbum->getArtistId();
 
-                            echo DisplayPopAlbumService::displayPopularAlbums($artworkURL, $albumName, $albumArtist, $albumArtistId);
+                            echo DisplayPopAlbumService::displayPopularAlbums($artworkURL, $albumName, $albumArtist, $artistId);
                         }
                         ?>
                     </div>
