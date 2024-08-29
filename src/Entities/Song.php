@@ -9,6 +9,12 @@ class Song
     private ?int $playCount;
     private int $favourite;
     private int $songId;
+    private string $timePlayed;
+
+    public function getTimePlayed(): string
+    {
+        return $this->timePlayed;
+    }
 
     public function getFavourite(): int
     {
@@ -20,13 +26,14 @@ class Song
         return $this->songId;
     }
 
-    public function __construct(string $songName = '', float $length = 0, ?int $playCount = 0, int $favourite = 0, int $songId = 0)
+    public function __construct(string $songName = '', float $length = 0, ?int $playCount = 0, int $favourite = 0, int $songId = 0, string $timePlayed = '')
     {
         $this->songName = $songName;
         $this->length = $length;
         $this->playCount = $playCount;
         $this->favourite = $favourite;
         $this->songId = $songId;
+        $this->timePlayed = $timePlayed;
     }
 
     public function getSongName(): string

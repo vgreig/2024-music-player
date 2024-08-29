@@ -53,7 +53,7 @@ class AlbumsModel {
             INNER JOIN `artists` ON `artists`.`id` = `albums`.`artist_id`
             GROUP BY `albums`.`id`, `albums`.`album_name`
             ORDER BY `totalPlayCount` DESC
-            LIMIT 5;");
+            LIMIT 3;");
         $query->setFetchMode(PDO::FETCH_CLASS, Album::class);
         $query->execute();
         return $query->fetchAll();
