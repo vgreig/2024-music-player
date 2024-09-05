@@ -31,6 +31,11 @@ if(isset($_GET['playSong'])&& isset($_GET['songId'])){
     $songsModel->updatePlayCount($songId);
 }
 
+if (isset($_GET['songId'])) {
+    $songId = (int)$_GET['songId'];
+    $songsModel->updateFavouriteStatus($songId);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
