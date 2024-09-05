@@ -23,6 +23,7 @@ $album = new Album();
 $displayArtists = Choose3ArtistsService::choose3Artists($artists);
 $songsModel = new SongsModel($db);
 $recentSongs = $songsModel->getRecentlyPlayed();
+$song =  new Song();
 
 if(isset($_GET['playSong'])&& isset($_GET['songId'])){
     $songId = (int)$_GET['songId'];

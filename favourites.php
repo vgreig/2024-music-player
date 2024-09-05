@@ -10,6 +10,7 @@ require_once 'src/Entities/Song.php';
 require_once 'src/Entities/Artist.php';
 require_once 'src/Services/DisplayFartistService.php';
 require_once 'src/Services/DisplayPlayButtonService.php';
+require_once 'src/Services/DisplaySongService.php';
 
 $db = DatabaseConnector::connect();
 $artists = new ArtistsModel($db);

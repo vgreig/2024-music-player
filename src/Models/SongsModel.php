@@ -96,4 +96,19 @@ class SongsModel {
             WHERE `id` = :songId;");
         return $query->execute(['songId'=>$songId]);
     }
+
+    public function searchSongName(string $search): array
+    {
+        $query = $this->db->prepare('SELECT `songs`.`id` AS "songId", `songs`.`song_name` AS "songName", `artist_name` AS "artistName", `length`, `album_id` AS "albumId", `play_count` AS "playCount", `time_played` AS "timePlayed",`favourite`,`artists`.`id` AS "artistId"
+            FROM `albums`
+            INNER JOIN `artists`
+            ON `artist_id` = `artists`.`id`
+            INNER JOIN `songs`
+            ON `albums`.`id` = `album_id`
+            WHERE `song_name` LIKE :search
+            ORDER BY `artist_name`;');
+        $query->setFetchMode(PDO::FETCH_CLASS, Song::class);
+        $query->execute(['search'=> "%$search%"]);
+        return $query->fetchAll();
+    }
 }
