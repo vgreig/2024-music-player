@@ -97,6 +97,9 @@ class SongsModel {
         return $query->execute(['songId'=>$songId]);
     }
 
+    /**
+     * @return Song[]
+     */
     public function searchSongName(string $search): array
     {
         $query = $this->db->prepare('SELECT `songs`.`id` AS "songId", `songs`.`song_name` AS "songName", `artist_name` AS "artistName", `length`, `album_id` AS "albumId", `play_count` AS "playCount", `time_played` AS "timePlayed",`favourite`,`artists`.`id` AS "artistId"
