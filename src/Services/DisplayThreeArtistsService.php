@@ -9,7 +9,7 @@ class DisplayThreeArtistsService
         $threeArtists = '';
         foreach ($displayArtists as $artist) {
             $albums = $albumsModel->getAlbumsByArtistId($artist->getId());
-            $threeArtists .= "<a href='artist.php?id={$artist->getId()}' class='rounded bg-cyan-950 p-3 hover:bg-cyan-800 hover:cursor-pointer'>
+            $threeArtists .= "<a href='artist.php?id={$artist->getId()}' class='rounded-md border-2 border-white backdrop-blur-sm p-3 hover:bg-cyan-800 hover:cursor-pointer'>
                         <div class='flex gap-2 h-8'>";
             $counter = 0;
             foreach ($albums as $album) {

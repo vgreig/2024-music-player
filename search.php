@@ -111,8 +111,8 @@ if (isset($_GET['search'])){
                 echo $output;
                 ?>
             </section>
-            <section class="group-[.minimised]:py-2 group-[.minimised]:h-24 h-1/4 border-t bg-cyan-950 border-slate-500 p-6">
-                <div class="group-[.minimised]:hidden flex justify-between mb-5">
+            <section class="group-[.minimised]:p-2 group-[.minimised]:h-24 h-1/4 border-t bg-cyan-950 border-slate-500 p-6">
+                <div class="group-[.minimised]:hidden flex justify-between mb-5 bg-cyan-950">
                     <h3 class="text-2xl">Now Playing</h3>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -120,9 +120,9 @@ if (isset($_GET['search'])){
                         </svg>
                     </div>
                 </div>
-                <div class="flex justify-between items-start md:items-stretch">
+                <div class="flex justify-between items-start md:items-stretch w-full bg-cyan-950">
                     <img src="https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees" class="group-[.minimised]:hidden hidden sm:block w-20 md:w-32 mr-5" alt="album cover" />
-                    <div class="flex justify-between flex-wrap grow content-between">
+                    <div class="flex justify-between flex-wrap grow content-between w-full">
                         <div class="group-[.minimised]:hidden w-full md:w-auto">
                             <h4 class="text-xl">Song title</h4>
                             <h5>Artist</h5>
@@ -144,7 +144,7 @@ if (isset($_GET['search'])){
                                 </svg>
                             </button>
                         </div>
-                        <div class="w-full flex justify-between">
+                        <div class="w-full flex justify-between bg-cyan-950">
                             <div class="mr-6" id="playTime">0:00</div>
                             <div class="bg-white rounded-md w-full h-6 overflow-hidden mr-6">
                                 <div class="bg-blue-500 w-0 h-full" id="playProgress"></div>
