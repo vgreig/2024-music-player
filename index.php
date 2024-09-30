@@ -77,17 +77,17 @@ if (isset($_GET['songId'])) {
             <section class="group-[.minimised]:h-[calc(100%-6rem)] h-3/4 p-12 overflow-auto">
                 <h2 class="text-4xl font-bold">Home</h2>
                 <div class="md:grid-cols-2 lg:grid-cols-3 mt-12 gap-5">
-                    <div class="">
+                    <div id="carouselSlidesOnly" class="relative" data-twe-carousel-init data-twe-ride="carousel">
                         <h3 class="text-xl font-bold mb-3">Artists</h3>
-                        <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div class="grid gap-3 mb-3 relative w-full overflow-hidden after:clear-both after:block after:content-['']">
                             <?php
                             echo DisplayThreeArtistsService::displayThreeArtistsService($displayArtists, $albumsModel);
                             ?>
-                            <div class="rounded-md border-2 border-white backdrop-blur-sm p-3 flex items-center">
+                            <div class="rounded-md border-2 border-white p-3 flex items-center">
                                 <h4 class="text-2xl font-bold text-slate-700">+ 15 more</h4>
                             </div>
                         </div>
-                        <a href="artists.php" class="float-right border rounded-md border-white backdrop-blur-sm px-2 py-1 hover:bg-cyan-800">See all
+                        <a href="artists.php" class="float-right border rounded-md border-white px-2 py-1 hover:bg-slate-500">See all
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
